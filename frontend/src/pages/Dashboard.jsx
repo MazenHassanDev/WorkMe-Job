@@ -36,11 +36,11 @@ export default function Dashboard() {
 
   const [query, setQuery] = useState("");
   const [statusFilters, setStatusFilters] = useState(() => ({
-    applied: true,
-    interview: true,
-    offer: true,
-    rejected: true,
-    withdrawn: true,
+    applied: false,
+    interview: false,
+    offer: false,
+    rejected: false,
+    withdrawn: false,
   }));
 
   const [createOpen, setCreateOpen] = useState(false);
@@ -74,8 +74,11 @@ export default function Dashboard() {
   const filteredJobs = useMemo(() => {
     const q = normalize(query);
     return jobs.filter((j) => {
-      const statusKey = (j.status || "applied").toLowerCase();
-      if (!statusFilters[statusKey]) return false;
+      const anyCecked = Object.values(statusFilters).some(Boolean)
+      if(anyCecked){
+        const statusKey = (j.status || "applied").toLowerCase();
+        if (!statusFilters[statusKey]) return false;
+      }
 
       if (!q) return true;
       const hay = `${j.title || ""} ${j.company || ""}`.toLowerCase();
