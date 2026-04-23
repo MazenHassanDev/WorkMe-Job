@@ -52,29 +52,7 @@ A full stack job application tracker that helps you manage your job search in on
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                        Browser                          │
-│              React + Vite (Vercel)                      │
-└──────────────────────┬──────────────────────────────────┘
-                       │ HTTPS (JWT Bearer token)
-                       ▼
-┌─────────────────────────────────────────────────────────┐
-│              Django REST Framework (Railway)            │
-│                                                         │
-│   ┌─────────────┐    ┌──────────┐    ┌──────────────┐  │
-│   │   Auth App  │    │  Job App │    │  AI Utils    │  │
-│   │  /api/auth/ │    │ /api/job/│    │  Anthropic   │  │
-│   └─────────────┘    └──────────┘    └──────────────┘  │
-│                            │                            │
-│              ┌─────────────┼─────────────┐             │
-│              ▼             ▼             ▼             │
-│        ┌──────────┐  ┌──────────┐                      │
-│        │PostgreSQL│  │  Redis   │                      │
-│        │(Railway) │  │(Upstash) │                      │
-│        └──────────┘  └──────────┘                      │
-└─────────────────────────────────────────────────────────┘
-```
+![System Diagram](./assets/WorkMe_Diagram.png)
 
 ---
 
