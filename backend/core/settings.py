@@ -11,11 +11,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-import os
-from dotenv import load_dotenv
+from decouple import config
 from datetime import timedelta
 
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,15 +23,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
-ANTHROPIC_API_KEY= os.getenv('ANTHROPIC_API_KEY')
+SECRET_KEY = config('SECRET_KEY')
+ANTHROPIC_API_KEY= config('ANTHROPIC_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG_STATUS')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', cast=bool, default=True)
+
+if not CORS_ALLOW_ALL_ORIGINS:
+    CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='').split(',')
 
 
 # Application definition
@@ -110,18 +111,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.getenv('DB_HOST'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'USER': os.getenv('DB_USER'),
-        'NAME': os.getenv('DB_NAME'),
-        'PORT': os.getenv('DB_PORT'),
+        'HOST': config('DB_HOST'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'USER': config('DB_USER'),
+        'NAME': config('DB_NAME'),
+        'PORT': config('DB_PORT'),
     }
 }
 
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': os.getenv('REDIS'),
+        'LOCATION': config('REDIS'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
