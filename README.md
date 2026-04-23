@@ -6,17 +6,12 @@ A full stack job application tracker that helps you manage your job search in on
 
 ---
 
-## Features
+## Architecture
 
-- **JWT Authentication** — secure register, login, logout, and token refresh via `djangorestframework-simplejwt`
-- **Job Application CRUD** — create, view, edit, and delete job applications
-- **AI-Powered Summarisation** — paste a job description and generate a concise bullet-point summary using the Anthropic API before saving
-- **Redis Caching** — API responses are cached in Redis with automatic invalidation on create, update, and delete
-- **Rate Limiting** — global throttling on all endpoints, with stricter limits on the AI summarisation endpoint (20 requests/day)
-- **Status Filtering & Search** — filter applications by status and search by title or company in real time
-- **Responsive Dashboard** — jobs grouped by status with a clean sidebar layout
+![System Diagram](./assets/WorkMe_Diagram.png)
 
 ---
+
 
 ## Tech Stack
 
@@ -50,11 +45,18 @@ A full stack job application tracker that helps you manage your job search in on
 
 ---
 
-## Architecture
+## Features
 
-![System Diagram](./assets/WorkMe_Diagram.png)
+- **JWT Authentication** — secure register, login, logout, and token refresh via `djangorestframework-simplejwt`
+- **Job Application CRUD** — create, view, edit, and delete job applications
+- **AI-Powered Summarisation** — paste a job description and generate a concise bullet-point summary using the Anthropic API before saving
+- **Redis Caching** — API responses are cached in Redis with automatic invalidation on create, update, and delete
+- **Rate Limiting** — global throttling on all endpoints, with stricter limits on the AI summarisation endpoint (20 requests/day)
+- **Status Filtering & Search** — filter applications by status and search by title or company in real time
+- **Responsive Dashboard** — jobs grouped by status with a clean sidebar layout
 
 ---
+
 
 ## API Reference
 
