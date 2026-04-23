@@ -12,10 +12,10 @@ export const updateJob = (pk, data) => {
     return api.patch(`/job/${pk}/`, data)
 }
 
-export const deleteJob = (pk, data) => {
-    return api.patch(`/job/${pk}/`, data)
+export const deleteJob = (pk) => {
+    return api.delete(`/job/${pk}/`)
 }
 
 export const summarizeDesc = (description) => {
-    return api.post('/job/summarize/', description)
+    return api.post('/job/summarize/', { description })
 }
