@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 ANTHROPIC_API_KEY= config('ANTHROPIC_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG_STATUS')
+DEBUG = config('DEBUG_STATUS', default=True)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
 
